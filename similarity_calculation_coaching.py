@@ -1,4 +1,3 @@
-import os
 import sys
 import pandas as pd
 import numpy as np
@@ -83,7 +82,7 @@ def process_file(csv_path: str) -> List[Dict]:
 
             # Store result
             results.append({
-                'file': os.path.basename(csv_path),
+                'file': Path(csv_path).name,
                 'turn_no_1': i,
                 'turn_no_2': i+1,
                 'speaker_1': current_turn['speaker_label'],
@@ -96,27 +95,7 @@ def process_file(csv_path: str) -> List[Dict]:
     return results
 
 
-def main():
-    """Main function to process all CSV files and output results."""
-    # Input and output paths
-    input_dir = Path('.')
-        # Check if the folder exists
-    if not os.path.isdir(input_dir):
-        print(f"Error: Folder '{input_dir}' does not exist.")
-        sys.exit(1)  # Exit with non-zero status (indicates error)
-    print(f"Folder '{input_dir}' exists.")
-    
-    output_file = 'output/cosine_similarity_results_test.csv'
-        # Check if the file exists and is not empty
-    if os.path.exists(output_file):
-        if os.path.getsize(output_file) > 0:
-            # Empty the file
-            open(output_file, 'w').close()
-            print(f"{output_file} was not empty — it has been cleared.")
-        else:
-            print(f"{output_file} is already empty.")
-    else:
-        print(f"{output_file} does not exist.")
+
 
     # Get all CSV files
     csv_files = list(input_dir.glob('*.csv'))

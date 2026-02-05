@@ -7,7 +7,6 @@ This module implements three approaches to measure speech alignment between spea
 3. Synchrony: Windowed average comparison between speakers
 """
 
-import os
 import pickle
 import pandas as pd
 import numpy as np
@@ -631,7 +630,7 @@ def process_file(pkl_path: str,
 
     # Calculate all metrics
     results = {
-        'file': os.path.basename(pkl_path).replace('_trillsson_features.pkl', ''),
+        'file': Path(pkl_path).name.replace('_trillsson_features.pkl', ''),
         'total_turns': len(df),
         'n_speakers': df['speaker'].nunique(),
         'speakers': ', '.join(df['speaker'].unique())

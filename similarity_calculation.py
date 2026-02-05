@@ -1,4 +1,3 @@
-import os
 import pandas as pd
 import numpy as np
 from pathlib import Path
@@ -68,7 +67,7 @@ def process_file(csv_path: str) -> List[Dict]:
 
             # Store result
             results.append({
-                'file': os.path.basename(csv_path),
+                'file': Path(csv_path).name,
                 'turn_id_1': int(current_turn['turn_id']),
                 'turn_id_2': int(next_turn['turn_id']),
                 'speaker_1': current_turn['speaker'],
